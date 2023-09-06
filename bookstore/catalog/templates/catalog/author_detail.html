@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+{% for group in user.groups.all %}
+{% if group.name == 'Book Store Staff' %}
+<a href="{% url 'edit-author' author.id %}" type="button" class="btn btn-warning">Edit</a>
+<a href="{% url 'delete-author' author.id %}" type="button" class="btn btn-danger">Delete</a>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+<h1>Author: {{ author.last_name }}, {{ author.first_name }}</h1>
+
+<br>
+<style>
+    .author-detail {
+        flex: 1;
+        /* Take up remaining space */
+        max-width: 300px;
+        /* Set a maximum width for the book details container */
+    }
+</style>
+<div class="author-detail">
+    <p><strong>Bio:</strong> {{ author.bio }}</p>
+</div>
+<p><strong>Books: </strong></p>
+{% if book_list %}
+<ul>
+    {% for book in book_list %}
+    <li>
+        <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+        ({{ book.author }})
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>There are no books in the library.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h1>Add Books</h1>
+      <a href="{% url 'add-book' %}" type="button" class="btn btn-primary">Add Book</a>
+    </div>
+    <div class="col-md-4">
+      <h1>Add Authors</h1>
+      <a href="{% url 'add-author' %}" type="button" class="btn btn-primary">Add Author</a>
+    </div>
+    <div class="col-md-4">
+      <h1>Add Genres</h1>
+      <a href="{% url 'add-genre' %}" type="button" class="btn btn-primary">Add Genre</a>
+    </div>
+    <div class="col-md-4">
+      <h1>Manage Users</h1>
+      <a href="{% url 'users:manage_users' %}" type="button" class="btn btn-primary">Manage Users</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

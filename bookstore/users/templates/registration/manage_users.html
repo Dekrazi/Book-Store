@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <h2>Users</h2>
+        {% for user in users %}
+        <div class="mb-2">
+            <h3>{{ user.username }} </h3>
+            <button type="submit" name="action" value="add_staff_{{ user.id }}" class="btn btn-success">Add to
+                Staff</button>
+            <button type="submit" name="action" value="remove_staff_{{ user.id }}" class="btn btn-danger">Remove from
+                Staff</button>
+        </div>
+        {% endfor %}
+    </div>
+</form>
+
+
+
+
+
+
+<br>
+<br>
+<a href="{% url 'manage-catalog' %}" class="btn btn-outline-info btn-inline" style="white-space: nowrap;">
+    <span style="display: inline-block;">Manage Store</span></a>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+{% if messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endif %}
+
+{% if user.is_authenticated %}
+{% for group in user.groups.all %}
+{% if group.name == 'Book Store Staff' %}
+<a href="{% url 'edit-book' book.id %}" type="button" class="btn btn-warning">Edit</a>
+<a href="{% url 'delete-book' book.id %}" type="button" class="btn btn-danger">Delete</a>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+<div class="book-detail-container">
+    <div class="book-item">
+        <img src="{{ book.coverpage.url }}" alt="{{ book.title }}" class="book-image common-image-class">
+    </div>
+    <div class="book-details">
+        <h2>{{ book.title }}</h2>
+        <strong>Genres:</strong>
+        <p>
+            {% for genre in book.genre.all %}
+            <a href="{{ genre.get_absolute_url }}">{{ genre.name }}</a>
+            {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+        <p><strong>Author:</strong> <a href="{{ book.author.get_absolute_url }}">{{ book.author }}</a></p>
+        <p><strong>Description:</strong> {{ book.description }}</p>
+    </div>
+    <div class="book-info d-flex flex-column align-items-center">
+        <button id="add-to-cart-{{ book.id }}" data-product="{{ book.id }}" data-action="add"
+            class="btn btn-outline-primary price-button update-cart">
+            <span class="price">${{ book.price }}</span>
+            <span class="cart-icon">&#128722;</span>
+            <span class="tooltip">Add to cart</span>
+        </button>
+    </div>
+</div>
+<script type='text/javascript' src='{% static ' js/cart.js' %}'></script>
+{% endblock %}

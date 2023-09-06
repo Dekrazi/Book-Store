@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% include 'custom_pagination.html' %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+{% if messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endif %}
+
+{% if book_list %}
+<div class="book-container">
+    {% for book in book_list %}
+    {% if book.coverpage %}
+    <div class="book-item">
+        <a href="{{ book.get_absolute_url }}">
+            <img src="{{ book.coverpage.url }}" alt="{{ book.title }}" class="book-image">
+        </a>
+        <div class="book-info">
+            <h5><a href="{{ book.get_absolute_url }}" class="book-title">{{ book.title|truncatechars:14 }}</a></h5>
+            <p>{{ book.author }}</p>
+            <div class="book-info d-flex flex-column align-items-center">
+                <button id="add-to-cart-{{ book.id }}" data-product="{{ book.id }}" data-action="add"
+                    class="btn btn-outline-primary price-button update-cart">
+                    <span class="price">${{ book.price }}</span>
+                    <span class="cart-icon">&#128722;</span>
+                    <span class="tooltip">Add to cart</span>
+                </button>
+            </div>
+            {% if not book.stock %}
+            <p>Out of Stock</p>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if forloop.counter|divisibleby:3 and not forloop.last %}
+    <div class="clearfix"></div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% else %}
+<p>There are no books in the store.</p>
+{% endif %}
+{% endblock %}
+o!--
+<script type='text/javascript' src='{% static ' js/cart.js' %}'></script> -->

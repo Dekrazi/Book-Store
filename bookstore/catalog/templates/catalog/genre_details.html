@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+{% for group in user.groups.all %}
+{% if group.name == 'Book Store Staff' %}
+<a href="{% url 'edit-genre' selected_genre.id %}" type="button" class="btn btn-warning">Edit</a>
+<a href="{% url 'delete-genre' selected_genre.id %}" type="button" class="btn btn-danger">Delete</a>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+<h1>Books by Genre: {{ selected_genre.name }}</h1>
+
+{% if books %}
+<ul>
+    {% for book in books %}
+    <li>
+        <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+        ({{ book.author }})
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>There are no books in this genre.</p>
+{% endif %}
+
+{% endblock %}

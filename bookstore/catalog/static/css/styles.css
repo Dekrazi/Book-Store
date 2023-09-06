@@ -1,0 +1,251 @@
+/* styles.css */
+
+/* Container to hold the book items */
+.book-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.pagination {
+    clear: both;
+    margin-top: 20px;
+    /* Adjust this value as needed */
+    display: flex;
+    justify-content: center;
+    /* Center pagination horizontally */
+}
+
+.book-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 23%; /* Adjust this value as needed */
+    min-height: 300px;
+    margin: 10px;
+    text-align: center;
+}
+
+/* Each book item */
+.book-container .book-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center horizontally */
+    justify-content: space-between;
+    width: 200px;
+    /* Adjust the width as needed */
+    min-height: 300px;
+    /* Set a minimum height for the book item container */
+    margin: 10px;
+    text-align: center;
+}
+
+/* Book image container */
+.book-image-container {
+    width: 100px;
+    /* Set the desired width for the container */
+    height: 200px;
+    /* Set the desired height for the container */
+    display: flex;
+    justify-content: center;
+    /* Center the image horizontally */
+    align-items: center;
+    /* Center the image vertically */
+    border-radius: 8px;
+    /* Add rounded corners to the container */
+    overflow: hidden;
+    /* Hide any parts of the image that exceed the container size */
+}
+
+.common-image-class {
+    width: 200px;
+    /* Set the desired width for the image */
+    height: 300px;
+    /* Set the desired height for the image */
+    object-fit: contain;
+    /* Scale the image while preserving aspect ratio and fit inside the container */
+    border-radius: 8px;
+    /* Add rounded corners to the image */
+}
+
+/* Book cover image */
+.book-container .book-item .book-image {
+    width: 150px;
+    height: 250px;
+    margin-top: 20px;
+    /* Set the height to 100% to fill the entire container height */
+    object-fit: contain;
+    /* Scale the image while preserving aspect ratio and fit inside the container */
+    border-radius: 8px;
+    /* Add rounded corners to the image */
+    transition: transform 0.2s ease;
+    /* Add transition for smooth animation */
+}
+
+/* Book title link */
+.book-container .book-item .book-title {
+    text-decoration: none;
+    color: #212529;
+    font-weight: bold;
+    white-space: nowrap;
+    /* Limit the width of the book title to a minimum of 100px and a maximum of 150px */
+    width: clamp(100px, 150px, 100%);
+    /* Add ellipsis to truncate the title if it's too long */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Hover effect for the book image */
+.book-container .book-item .book-image:hover {
+    transform: scale(1.02);
+    /* Scale the image up slightly on hover */
+}
+
+/* CSS for the price button */
+.price-button {
+    /* Other code remains the same */
+    width: 100px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    /* Add this line to vertically center the button */
+    justify-content: center;
+    /* Add this line to horizontally center the button */
+    margin-top: auto;
+    /* Adjust this to control the space between the button and other elements */
+    gap: 5px;
+    border-radius: 8px;
+}
+
+.btn-custom {
+    border: none; /* Remove the border */
+    background-color: transparent; /* Make the background transparent */
+    padding: 0; /* Remove any padding */
+    font-size: 1rem; /* Set the font size to match your design */
+    color: #000; /* Set the text color */
+}
+
+.row-image{
+    width: 100px;
+}
+
+/* Cart icon */
+.cart-icon {
+    font-size: 20px;
+    /* Adjust the font-size as needed */
+}
+.cart-icon {
+    position: relative;
+}
+
+.cart-row{
+    display: flex;
+    align-items: flex-stretch;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+#cart-total {padding-bottom: 10px;
+    margin-bottom: 10px;
+    position: absolute;
+    top: -15px;
+    right: -20px;
+    /* background-color: red; Change this to the desired background color */
+    color: gray; /* Change this to the desired text color */
+    border-radius: 50%;
+    padding: 7px 8px;
+} 
+
+.quantity{
+    display: inline-block;
+    font-weight: 700;
+    padding-right: 10;
+}
+
+.chg-quantity{
+    width: 12px;
+    cursor: pointer;
+    display: block;
+    margin-top: 5px;
+    transition: .1s;
+}
+
+.chg-quantity:hover{
+    opacity: .6;
+}
+
+
+/* Tooltip */
+.tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #000;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+}
+
+/* Additional styles for the book detail page */
+.book-detail-container {
+    display: flex;
+    justify-content: flex-start;
+    /* Align the content to the left */
+    align-items: center;
+    /* Center items vertically */
+    gap: 20px;
+}
+
+.book-detail-container .book-details {
+    flex: 1;
+    /* Take up remaining space */
+    max-width: 500px;
+    /* Set a maximum width for the book details container */
+}
+
+
+/* Override Bootstrap form field alignment */
+#form-wrapper .form-field {
+    text-align: left; /* Align form fields to the left */
+}
+
+/* Adjust the width of form fields as needed */
+#form-wrapper .form-control {
+    width: 100%;
+}
+
+/* Set the maximum width of the wrapper container */
+#form-wrapper {
+    max-width: 400px; /* Adjust this value based on your design */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 auto; /* Center the wrapper horizontally */
+}
+
+/* Override Bootstrap button alignment */
+#form-button {
+    margin-top: 10px; /* Add some spacing between the form and the button */
+}
+
+/* Additional styling for the box element */
+.box-element {
+    box-shadow: hsl(0, 0%, 80%) 0 0 16px;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 10px;
+}
+

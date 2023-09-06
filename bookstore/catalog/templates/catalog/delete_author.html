@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Delete Author</h1>
+<p>Are you sure you want to delete the author"{{ author.last_name }}{{ author.first_name }}"?</p>
+<form method="post">
+  {% csrf_token %}
+  <input type="submit" value="Confirm Delete" class="btn btn-danger">
+  <a href="{% url 'authors' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

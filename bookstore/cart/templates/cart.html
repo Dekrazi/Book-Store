@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<script>
+    var user = '{{ user }}';
+</script>
+
+<div class="container mx-auto">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box-element">
+                <a class="btn btn-outline-dark" href="{% url 'books' %}">&#x2190;Continue Shopping</a>
+
+                <br>
+                <br>
+                <table class="table">
+                    <tr>
+                        <th>
+                            <h5>Items: <strong>{{ quantity_total }}</strong></h5>
+                        </th>
+                        <th>
+                            <h5>Total: <strong>${{ cart_total|floatformat:2 }}</strong></h5>
+                        </th>
+                        <th><a style="float:right; margin:5px;" class="btn btn-success"
+                                href="{% url 'checkout' %}">Checkout</a>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <br>
+
+            <div class="box-element">
+                <div class="cart-row">
+                    <div style="flex:2"><strong></strong></div>
+                    <div style="flex:2"><strong>Item</strong></div>
+                    <div style="flex:1"><strong>Price</strong></div>
+                    <div style="flex:1"><strong>Quantity</strong></div>
+                    <div style="flex:1"><strong>Total</strong></div>
+                </div>
+
+                {% for item in items %}
+                <div class="cart-row">
+                    <div style="flex: 2"><img src="{{ item.product.coverpage.url }}" alt="{{ item.product.title }}"
+                            style="width: 70px; height: 120px;"></div>
+                    <div style="flex: 2">
+                        <p>{{ item.product.title }}</p>
+                    </div>
+                    <div style="flex: 1">
+                        <p>${{ item.product.price }}</p>
+                    </div>
+                    <div style="flex: 1">
+                        <p class="quantity">x{{ item.quantity }}</p>
+                        <div class="quantity">
+                            <p data-product="{{ item.product.id }}" data-action="add" class="chg-quantity update-cart">
+                                &#x1F53A;</p>
+                            <p data-product="{{ item.product.id }}" data-action="remove"
+                                class="chg-quantity update-cart">
+                                &#x1F53B;</p>
+
+                        </div>
+                    </div>
+                    <div style="flex: 1">${{ item.total_price|floatformat:2 }}</div>
+                </div>
+                <hr>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
