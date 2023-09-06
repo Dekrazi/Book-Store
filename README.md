@@ -1,1 +1,1 @@
-# Book-Store
+# Book Store project in django. WIP
