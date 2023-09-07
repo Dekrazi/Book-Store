@@ -13,7 +13,7 @@ def index(request):
 # BOOK
 class BookListView(generic.ListView):
     model = Book
-    paginate_by = 10
+    paginate_by = 14
 
     def get_queryset(self):
         query = self.request.GET.get("q")
@@ -118,7 +118,7 @@ def add_author(request):
         form = AuthorForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("authors")
+            return redirect("manage-catalog")
     else:
         form = AuthorForm()
 
@@ -167,7 +167,7 @@ def add_genre(request):
         form = GenreForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("add-book")
+            return redirect("add-genre")
     else:
         form = GenreForm()
 

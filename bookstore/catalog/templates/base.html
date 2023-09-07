@@ -88,20 +88,18 @@
                     </li>
                 </ul>
             </div>
-
+            {% if user.is_authenticated %}
             <div class="navbar-brand">
-              <div class="mr-3">
-                <span>Welcome, {{ user.username }} </span>
-              </div>
+                <div class="mr-3">
+                    <span>Welcome, {{ user.username }} </span>
+                </div>
             </div>
+            {% endif %}
             <a href="{% url 'cart' %}">
                 <button class="cart-icon btn btn-custom" style="margin-right: 30px;">
                     &#128722; <span id="cart-total">{{ cartItems }}</span>
                 </button>
             </a>
-
-
-
 
             {% if user.is_authenticated %}
             <div class="btn-group me-2" role="group" aria-label="User Actions">
