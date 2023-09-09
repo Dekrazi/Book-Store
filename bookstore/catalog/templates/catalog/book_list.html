@@ -5,13 +5,26 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 {% if messages %}
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <div id="autoCloseAlert" class="alert alert-success alert-dismissible fade show" role="alert">
         {% for message in messages %}
             {{ message }}
         {% endfor %}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+
+    <script>
+        // Add JavaScript to close the alert after a specific duration (e.g., 5 seconds)
+        setTimeout(function() {
+            var autoCloseAlert = document.getElementById('autoCloseAlert');
+            if (autoCloseAlert) {
+                autoCloseAlert.classList.add('fade');
+                setTimeout(function() {
+                    autoCloseAlert.style.display = 'none';
+                }, 500); // Adjust the duration (in milliseconds) as needed
+            }
+        }, 1500); // 5 seconds before auto-closing
+    </script>
 {% endif %}
+
 
 {% if book_list %}
 <div class="book-container">
