@@ -13,7 +13,7 @@ def index(request):
 # BOOK
 class BookListView(generic.ListView):
     model = Book
-    paginate_by = 14
+    paginate_by = 16
 
     def get_queryset(self):
         query = self.request.GET.get("q")
@@ -82,7 +82,6 @@ def delete_book(request, book_id):
     return render(request, "delete_book.html", {"book": book})
 
 
-@user_passes_test(user_in_book_store_staff_group)
 def book_list(request):
     books = Book.objects.all()
     return render(request, "book_list.html", {"books": books})

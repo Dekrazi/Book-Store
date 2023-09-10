@@ -25,41 +25,73 @@
     </script>
 {% endif %}
 
+<div class="sorting-buttons">
+    <a href="#" data-sort="title" class="btn btn-outline-dark btn-sm">Sort by Title</a>
+    <a href="#" data-sort="author" class="btn btn-outline-dark btn-sm">Sort by Author</a> 
+</div>
+
 
 {% if book_list %}
 <div class="book-container">
     {% for book in book_list %}
-    {% if book.coverpage %}
-    <div class="book-item">
-        <a href="{{ book.get_absolute_url }}">
-            <img src="{{ book.coverpage.url }}" alt="{{ book.title }}" class="book-image">
-        </a>
-        <div class="book-info">
-            <h5><a href="{{ book.get_absolute_url }}" class="book-title">{{ book.title|truncatechars:14 }}</a></h5>
-            <p>{{ book.author }}</p>
-            <div class="book-info d-flex flex-column align-items-center">
-                <button id="add-to-cart-{{ book.id }}" data-product="{{ book.id }}" data-action="add"
-                    class="btn btn-outline-primary price-button update-cart">
-                    <span class="price">${{ book.price }}</span>
-                    <span class="cart-icon">&#128722;</span>
-                    <span class="tooltip">Add to cart</span>
-                </button>
+        {% if book.coverpage %}
+        <div class="book-item">
+            <a href="{{ book.get_absolute_url }}">
+                <img src="{{ book.coverpage.url }}" alt="{{ book.title }}" class="book-image">
+            </a>
+            <div class="book-info">
+                <h5><a href="{{ book.get_absolute_url }}" class="book-title">{{ book.title|truncatechars:14 }}</a></h5>
+                <p class="book-author">{{ book.author }}</p>
+                <div class="book-info d-flex flex-column align-items-center">
+                    <button id="add-to-cart-{{ book.id }}" data-product="{{ book.id }}" data-action="add"
+                        class="btn btn-outline-primary price-button update-cart">
+                        <span class="price">${{ book.price }}</span>
+                        <span class="cart-icon">&#128722;</span>
+                        <span class="tooltip">Add to cart</span>
+                    </button>
+                </div>
+                {% if not book.stock %}
+                <p>Out of Stock</p>
+                {% endif %}
             </div>
-            {% if not book.stock %}
-            <p>Out of Stock</p>
-            {% endif %}
         </div>
-    </div>
-    {% endif %}
-
-    {% if forloop.counter|divisibleby:3 and not forloop.last %}
-    <div class="clearfix"></div>
-    {% endif %}
+        {% endif %}
     {% endfor %}
 </div>
 {% else %}
 <p>There are no books in the store.</p>
 {% endif %}
+
+<script>
+    // JavaScript to handle sorting
+    document.addEventListener("DOMContentLoaded", function() {
+        const sortingButtons = document.querySelectorAll(".sorting-buttons a");
+
+        sortingButtons.forEach(button => {
+            button.addEventListener("click", function(e) {
+                e.preventDefault();
+                const sortCriteria = this.getAttribute("data-sort");
+                sortBooks(sortCriteria);
+            });
+        });
+
+        function sortBooks(criteria) {
+            const bookContainer = document.querySelector(".book-container");
+            const bookItems = Array.from(bookContainer.querySelectorAll(".book-item"));
+
+            bookItems.sort(function(a, b) {
+                const aValue = a.querySelector(`.book-${criteria}`).textContent;
+                const bValue = b.querySelector(`.book-${criteria}`).textContent;
+
+                return aValue.localeCompare(bValue);
+            });
+
+            // Clear the container and append sorted items
+            bookContainer.innerHTML = "";
+            bookItems.forEach(item => bookContainer.appendChild(item));
+        }
+    });
+</script>
+
+
 {% endblock %}
-o!--
-<script type='text/javascript' src='{% static ' js/cart.js' %}'></script> -->
