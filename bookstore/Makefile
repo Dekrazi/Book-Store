@@ -19,17 +19,14 @@ clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
 	rm -rf env
 
-# Build the Docker image
 docker-build:
-    docker build -t dekrazi/book-store:latest -f Dockerfile .
+	docker build . -t dekrazi/book-store:latest
 
-# Push the Docker image with the "latest" tag
 docker-push:
-    docker push dekrazi/book-store:latest
+	docker push dekrazi/book-store:latest
 
-# Remove the local Docker image
 docker-clean:
-    docker rmi dekrazi/book-store:latest
+	docker rmi dekrazi/book-store:latest
 
 
 
