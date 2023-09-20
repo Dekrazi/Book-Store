@@ -4,6 +4,8 @@
 
 PYTHON = env/bin/python
 PIP = env/bin/pip
+IMAGE = dekrazi/book-store
+TAG = latest
 
 env/bin/activate: requirements.txt
 	python3 -m venv env
@@ -20,13 +22,13 @@ clean:
 	rm -rf env
 
 docker-build:
-	docker build . -t dekrazi/book-store:latest
+	docker build . -t ${IMAGE}:${TAG}
 
 docker-push:
-	docker push dekrazi/book-store:latest
+	docker push ${IMAGE}:${TAG}
 
 docker-clean:
-	docker rmi dekrazi/book-store:latest
+	docker rmi ${IMAGE}:${TAG}
 
 
 
