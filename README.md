@@ -14,7 +14,7 @@ To run the Book Store locally, follow these steps:
 
 1. Clone the repository:
 ```
-git clone git@github.com:Dekrazi/Book-Store.git
+git clone https://github.com/Dekrazi/Book-Store.git
 ```
 
 2. Navigate to the project directory where the Makefile is located.
